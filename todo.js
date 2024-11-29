@@ -1,9 +1,18 @@
+// well i really tried to remove the last section and i almost manage to do it check the line 81..when we refresh the site , the number of element that have the classname total-task is increased by one and it is in a object so idk why i cant delete it
+
 const text = document.getElementById(`text-input`);
 const addButton = document.querySelector(`.add-button`);
 const inputBox = document.querySelector(`.container2`);
 
 let totalTask = document.createElement(`p`);
 let button = document.createElement(`button`);
+
+let x;
+let y;
+
+//console.log(totalTask);
+
+//console.log(button);
 
 let taskNo = 0;
 getData();
@@ -12,9 +21,9 @@ function saveData() {
     inputBox.innerHTML = "";
     localStorage.setItem(`data`, inputBox.innerHTML);
     localStorage.setItem(`data1`, JSON.stringify(taskNo));
-    console.log(`not`);
+    //console.log(`not`);
   } else {
-    console.log(`yes`);
+    // console.log(`yes`);
     updateNum();
     localStorage.setItem(`data`, inputBox.innerHTML);
     localStorage.setItem(`data1`, JSON.stringify(taskNo));
@@ -38,22 +47,13 @@ addButton.addEventListener(`click`, () => {
   if (text.value.trim() === "") {
     alert(`you must write something`);
   } else {
-    // well i couldnt figure out why i cant remove the totalTask and button. clearly they are the inputbox child but i cant remove them this is the only problem i cant solve
-    // if (inputBox.childNodes) {
-    //console.log(inputBox.children);
-    //console.log(inputBox.innerHTML);
-    //inputBox.removeChild(totalTask);
-    //inputBox.removeChild(button);
-
-    //}
+    taskNo = taskNo + 1;
 
     let list = document.createElement(`li`);
     let img = document.createElement(`img`);
 
     list.innerHTML = text.value;
     img.src = "image/icons8-bin-24.png";
-
-    taskNo = taskNo + 1;
 
     inputBox.appendChild(list).append(img);
 
@@ -64,6 +64,21 @@ addButton.addEventListener(`click`, () => {
     inputBox.appendChild(totalTask);
     inputBox.appendChild(button);
     text.value = "";
+
+    x = document.getElementsByClassName(`total-task`);
+    y = document.getElementsByClassName(`clear-button`);
+
+    if (x.length > 1) {
+      delete x["0"];
+      delete y["0"];
+      console.log(y["0"]);
+      console.log(x["0"]);
+      //console.log(y)
+      //console.log(x);
+      //console.log(x.length);
+      //console.log(typeof x);
+    }
+
     saveData();
 
     //console.log(inputBox.innerHTML);
@@ -95,3 +110,7 @@ inputBox.addEventListener(`click`, (e) => {
 });
 
 //console.log(inputBox.childNodes);
+let b = { 12: 90, d: 89 };
+delete b[`d`];
+delete b["12"];
+console.log(b);
